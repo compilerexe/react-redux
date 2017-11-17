@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import * as FontAwesome from 'react-icons/lib/fa'
 import { Link } from 'react-router-dom'
+import store from '../redux/store/users'
+import { sign_up } from '../redux/action/users'
 
 export default class SignUp extends Component {
 
@@ -18,10 +20,12 @@ export default class SignUp extends Component {
     const submit = (e) => {
       e.preventDefault()
 
-      const {password, confirm_password} = this.state
+      const {email, password, confirm_password} = this.state
 
       if (password !== confirm_password) {
         swal('Oops!', 'Password does not match the confirm password.', 'error')
+      } else {
+        sign_up({email: email, password: password})
       }
     }
 
